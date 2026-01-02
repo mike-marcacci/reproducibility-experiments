@@ -1,9 +1,21 @@
-# SwiftUI
+# SwiftUI Minimal
 
-This is a minimal proof-of-concept attempting to make truly reproducible macOS apps using SwiftUI.
+A minimal proof-of-concept for truly reproducible macOS apps using SwiftUI and direct `swiftc` compilation.
+
+See also [`../swiftui-package`](../swiftui-package) for an alternative approach using Swift Package Manager that supports both Xcode development and Nix builds.
+
+## Approach
+
+This variant uses `swiftc` directly rather than Swift Package Manager. This provides:
+
+- Maximum control over compiler flags
+- No SPM resolution step or `.build` artifacts
+- Simpler Nix integration
+- No Xcode/SPM compatibility (Nix-only)
 
 ## Nix
-We're using nix to provide a hermetic toolchain, and are avoiding Xcode at all costs. For the initial iteration, we are using `apple-sdk_14` rather than `apple-sdk_26`, as the latter requires Swift 6 which is not yet available via nix (see [this issue](https://github.com/NixOS/nixpkgs/issues/343210)).
+
+We're using Nix to provide a hermetic toolchain. For the initial iteration, we are using `apple-sdk_14` rather than `apple-sdk_26`, as the latter requires Swift 6 which is not yet available via nix (see [this issue](https://github.com/NixOS/nixpkgs/issues/343210)).
 
 ## Signing and Verification
 
