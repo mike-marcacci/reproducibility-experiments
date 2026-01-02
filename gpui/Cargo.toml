@@ -1,0 +1,8 @@
+[package]
+name = "nix-gpui-example"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# runtime_shaders compiles Metal shaders at runtime, avoiding need for metal/metallib tools at build time
+gpui = { git = "https://github.com/zed-industries/zed", rev = "v0.167.2", features = ["runtime_shaders"] }

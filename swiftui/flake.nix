@@ -108,10 +108,8 @@
           pkgs = nixpkgs.legacyPackages.${system};
 
           # Explicit targets - one native, one cross-compiled depending on host
-          pkgsAarch64 =
-            if system == "aarch64-darwin" then pkgs else pkgs.pkgsCross.aarch64-darwin;
-          pkgsX86_64 =
-            if system == "x86_64-darwin" then pkgs else pkgs.pkgsCross.x86_64-darwin;
+          pkgsAarch64 = if system == "aarch64-darwin" then pkgs else pkgs.pkgsCross.aarch64-darwin;
+          pkgsX86_64 = if system == "x86_64-darwin" then pkgs else pkgs.pkgsCross.x86_64-darwin;
         in
         {
           default = mkApp pkgs;
