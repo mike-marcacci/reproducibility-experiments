@@ -1,0 +1,12 @@
+# Nix
+result
+result-*
+
+# macOS
+.DS_Store
+
+# Build artifacts (if building outside Nix)
+*.app/
+*.o
+*.swiftmodule
+*.swiftdoc
