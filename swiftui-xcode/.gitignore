@@ -1,0 +1,18 @@
+# macOS
+.DS_Store
+
+# Xcode user data
+xcuserdata/
+*.xcuserstate
+
+# Xcode build products
+build/
+DerivedData/
+
+# Swift Package Manager (if used within Xcode)
+.swiftpm/
+.build/
+Package.resolved
+
+# Nix
+result
