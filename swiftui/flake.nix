@@ -19,7 +19,7 @@
 
       appName = "MinimalSwiftUI";
 
-      # Reusable derivation builder - takes target pkgs (native or cross)
+      # Reusable derivation builder
       mkApp =
         pkgs:
         let
@@ -106,15 +106,27 @@
         system:
         let
           pkgs = nixpkgs.legacyPackages.${system};
-
-          # Explicit targets - one native, one cross-compiled depending on host
-          pkgsAarch64 = if system == "aarch64-darwin" then pkgs else pkgs.pkgsCross.aarch64-darwin;
-          pkgsX86_64 = if system == "x86_64-darwin" then pkgs else pkgs.pkgsCross.x86_64-darwin;
         in
         {
           default = mkApp pkgs;
-          aarch64 = mkApp pkgsAarch64;
-          x86_64 = mkApp pkgsX86_64;
+        }
+      );
+
+      # Default app to run the application
+      apps = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+          pkg = self.packages.${system}.default;
+          launcher = pkgs.writeShellScript "run-${appName}" ''
+            open "${pkg}/Applications/${appName}.app"
+          '';
+        in
+        {
+          default = {
+            type = "app";
+            program = "${launcher}";
+          };
         }
       );
 
